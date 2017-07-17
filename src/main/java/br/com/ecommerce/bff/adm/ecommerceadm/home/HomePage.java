@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class HomePage {
-
     private static final String INDEX_PAGE = "static/index.html";
 
     @GetMapping("/home")
