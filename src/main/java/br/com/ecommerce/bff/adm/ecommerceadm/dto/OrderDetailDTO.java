@@ -1,9 +1,8 @@
 package br.com.ecommerce.bff.adm.ecommerceadm.dto;
 
+import br.com.ecommerce.bff.adm.ecommerceadm.product.ProductDTO;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
