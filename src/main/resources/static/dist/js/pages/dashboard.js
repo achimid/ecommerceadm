@@ -129,6 +129,7 @@ $(function () {
 
   /* Morris.js Charts */
   // Sales chart
+  /*
   var area = new Morris.Area({
     element: 'revenue-chart',
     resize: true,
@@ -191,7 +192,7 @@ $(function () {
       {label: "Mail-Order Sales", value: 20}
     ],
     hideHover: 'auto'
-  });
+  });*/
 
   //Fix for charts under tabs
   $('.box ul.nav a').on('shown.bs.tab', function (e) {

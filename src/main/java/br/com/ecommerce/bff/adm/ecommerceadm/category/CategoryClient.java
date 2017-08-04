@@ -1,9 +1,8 @@
-package br.com.ecommerce.bff.adm.ecommerceadm.product;
+package br.com.ecommerce.bff.adm.ecommerceadm.category;
 
-import br.com.ecommerce.bff.adm.ecommerceadm.category.CategoryClient;
+import br.com.ecommerce.bff.adm.ecommerceadm.dto.CategoryDTO;
 import br.com.ecommerce.bff.adm.ecommerceadm.product.ProductDTO;
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -15,43 +14,35 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class ProductClient {
+public class CategoryClient {
 
     @Value("${ecommerce-api.base-url}")
     private String ecommerceApiUrl;
 
-    @Autowired
-    private CategoryClient categoryClient;
-
-    public List<ProductDTO> findAll(){
+    public List<CategoryDTO> findAll(){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List> response = restTemplate.getForEntity(ecommerceApiUrl.concat("/products"), List.class);
+        ResponseEntity<List> response = restTemplate.getForEntity(ecommerceApiUrl.concat("/categories"), List.class);
         return response.getBody();
     }
 
-    public ProductDTO findOne(Long id){
+    public CategoryDTO findOne(Long id){
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<ProductDTO> response = restTemplate.getForEntity(
-                ecommerceApiUrl.concat("/products/").concat(id.toString()), ProductDTO.class);
+        ResponseEntity<CategoryDTO> response = restTemplate.getForEntity(
+                ecommerceApiUrl.concat("/categories/").concat(id.toString()), CategoryDTO.class);
         return response.getBody();
     }
 
-    public boolean save(ProductDTO product){
+    public boolean save(CategoryDTO categorie){
         RestTemplate restTemplate = new RestTemplate();
         try{
-            if(product.getId() != null){
-                product.setCategory(findOne(product.getId()).getCategory());
-            }else{
-                product.setCategory(categoryClient.findOne(2l));
-            }
-
+            System.out.println(new Gson().toJson(categorie));
             ResponseEntity<Map> response = restTemplate.postForEntity(
-                    ecommerceApiUrl.concat("/products"), product, Map.class);
+                    ecommerceApiUrl.concat("/categories"), categorie, Map.class);
         }catch(HttpClientErrorException e){
             Gson gson = new Gson();
             Map map = gson.fromJson(e.getResponseBodyAsString(), Map.class);
             List<Map> errors = (List<Map>) map.get("errors");
-            product.setErrors(errors.stream()
+            categorie.setErrors(errors.stream()
                 .map(i -> (String) i.get("defaultMessage"))
                 .collect(Collectors.toList()));
             return false;
