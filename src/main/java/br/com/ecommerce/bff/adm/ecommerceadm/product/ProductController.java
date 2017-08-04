@@ -37,6 +37,18 @@ public class ProductController {
         return new ModelAndView(PRODUCT_INDEX).addObject("products", products);
     }
 
+    @GetMapping("/delete/{id}")
+    public ModelAndView delete(@PathVariable Long id){
+        if(productClient.delete(id)){
+            return new ModelAndView(PRODUCT_REDIRECT)
+                    .addObject("mensage", "Excluido com sucesso.");
+        }else{
+            return new ModelAndView(PRODUCT_REDIRECT)
+                    .addObject("mensage", "Erro ao excluir.");
+        }
+
+    }
+
     @GetMapping("/{id}")
     public ModelAndView get(@PathVariable Long id){
         return get(productClient.findOne(id));

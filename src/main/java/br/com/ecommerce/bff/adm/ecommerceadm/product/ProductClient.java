@@ -36,6 +36,16 @@ public class ProductClient {
         return response.getBody();
     }
 
+    public boolean delete(Long id){
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.delete(ecommerceApiUrl.concat("/products/").concat(id.toString()), Map.class);
+        }catch(HttpClientErrorException e){
+            return false;
+        }
+        return true;
+    }
+
     public boolean save(ProductDTO product){
         RestTemplate restTemplate = new RestTemplate();
         try{
