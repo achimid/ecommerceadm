@@ -44,7 +44,7 @@ public class ProductClient {
             }else{
                 product.setCategory(categoryClient.findOne(2l));
             }
-
+            System.out.println(new Gson().toJson(product));
             ResponseEntity<Map> response = restTemplate.postForEntity(
                     ecommerceApiUrl.concat("/products"), product, Map.class);
         }catch(HttpClientErrorException e){
