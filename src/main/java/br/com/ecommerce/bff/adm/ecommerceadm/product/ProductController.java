@@ -1,7 +1,7 @@
 package br.com.ecommerce.bff.adm.ecommerceadm.product;
 
 import br.com.ecommerce.bff.adm.ecommerceadm.category.CategoryClient;
-import br.com.ecommerce.bff.adm.ecommerceadm.dto.CategoryDTO;
+import br.com.ecommerce.bff.adm.ecommerceadm.category.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

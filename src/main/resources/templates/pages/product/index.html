@@ -49,7 +49,7 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>Description</th>
-                    <th>Action</th>
+                    <th class="col-action-table">Action</th>
                   </tr>
                   <tr th:each="product : ${products}">
                     <td th:text="${product.id}">183</td>
@@ -62,7 +62,7 @@
                     <td th:text="${product.name}">John Doe</td>
                     <td th:text="${'$' + #numbers.formatDecimal(product.priceSale, 0, 'DEFAULT', 2, 'DEFAULT')}">15,50</td>
                     <td th:text="${product.description}"><span class="label label-success">Description</span></td>
-                    <td>
+                    <td class="col-action-table">
                       <a class="btn btn-success" th:href="@{products/{id}(id=${product.id})}" title="Edit product">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                       </a>

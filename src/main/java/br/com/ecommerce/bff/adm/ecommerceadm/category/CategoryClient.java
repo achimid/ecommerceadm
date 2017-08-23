@@ -1,7 +1,5 @@
 package br.com.ecommerce.bff.adm.ecommerceadm.category;
 
-import br.com.ecommerce.bff.adm.ecommerceadm.dto.CategoryDTO;
-import br.com.ecommerce.bff.adm.ecommerceadm.product.ProductDTO;
 import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +28,16 @@ public class CategoryClient {
         ResponseEntity<CategoryDTO> response = restTemplate.getForEntity(
                 ecommerceApiUrl.concat("/categories/").concat(id.toString()), CategoryDTO.class);
         return response.getBody();
+    }
+
+    public boolean delete(Long id){
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            restTemplate.delete(ecommerceApiUrl.concat("/products/").concat(id.toString()), Map.class);
+        }catch(HttpClientErrorException e){
+            return false;
+        }
+        return true;
     }
 
     public boolean save(CategoryDTO categorie){
